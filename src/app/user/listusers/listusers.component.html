@@ -1,0 +1,109 @@
+
+<div  class="border">
+
+
+  <button class="btn1" mat-raised-button color="primary" (click)="open(content)">Ajouter utilisateur</button>
+</div>
+<table class="table datatable-responsive">
+  
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Login</th>
+      <th>mot de passe </th>
+      <th>Role</th>
+      <th>Etat</th>
+      <th class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let User of users">
+      <td>{{ User.id }}</td>
+      <td>{{ User.login }}</td>
+      <td>*************</td>
+      <td>{{ User.role }}</td>
+      
+      <td><span class="badge badge-success">Active</span></td>
+      <td class="text-center">
+        <div class="list-icons">
+          <div class="dropdown">
+              <button mat-button color="warn">Modifier</button>
+              <button mat-button color="accent" (click)="delete(User.id)" (click)="open2(contentt)">Déactiver</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card my-5">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+          <div class="form-group">
+            <label for="login">login </label>
+            <input type="text" [(ngModel)]="User.login" 
+            class="form-control" 
+            id="login" 
+            name="login" 
+            placeholder="Enter user login "
+            required #login="ngModel">
+        </div>
+       
+        <div [hidden]="!login.pristine" class="alert alert-danger">login is required</div>
+        <div class="form-group">
+            <label for="pwd">mot de passe</label>
+            <input type="password" [(ngModel)]="User.pwd" 
+              class="form-control" 
+              id="pwd" 
+              name="pwd" 
+              placeholder="Enter your password"
+              required #pwd="ngModel">
+          </div>
+         
+          <div [hidden]="!pwd.pristine" class="alert alert-danger">password is required</div>
+  
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" [(ngModel)]="User.role" 
+              class="form-control" 
+              id="role" 
+              name="role" 
+              placeholder="Enter your role"
+              required #pwd="ngModel">
+            
+         
+         
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="!userForm.form.valid" (click)="onSubmit()" (click)="modal.close('Save click')"
+          class="btn btn-info">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  </div>
+ 
+</ng-template>
+
+<ng-template #contentt let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bonjour</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>voulez vous supprimer un utilisateur ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"  (click)="c('Save click')"> oui </button>
+  </div>
+</ng-template>
+

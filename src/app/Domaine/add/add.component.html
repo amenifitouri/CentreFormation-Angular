@@ -1,0 +1,84 @@
+
+<div  class="border">
+
+
+    <button class="btn1" mat-raised-button color="primary" (click)="open(content)">Ajouter Domaine</button>
+  </div>
+  <table class="table datatable-responsive">
+    
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Libelle</th>
+      
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Domaine of domaines">
+        <td>{{ Domaine.id }}</td>
+        <td>{{ Domaine.libelle }}</td>
+        
+        
+        
+        <td class="text-center">
+          <div class="list-icons">
+            <div class="dropdown">
+                <button mat-button color="warn">Modifier</button>
+                <button mat-button color="accent" (click)=" delete(Domaine.id)" (click)="open2(contentt)">Déactiver</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+  
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New Domaine</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card my-5">
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #libelleForm="ngForm">
+            <div class="form-group">
+              <label for="login">Libelle </label>
+              <input type="text" [(ngModel)]="domaine.libelle" 
+              class="form-control" 
+              id="libelle" 
+              name="libelle" 
+              placeholder="Enter user libelle "
+              required #libelle="ngModel">
+          </div>
+         
+          <div [hidden]="!libelle.pristine" class="alert alert-danger">libelle is required</div>
+         
+          <div class="modal-footer">
+            <button [disabled]="!libelleForm.form.valid" (click)="onSubmit()" (click)="modal.close('Save click')"
+            class="btn btn-info">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    </div>
+   
+  </ng-template>
+  
+  <ng-template #contentt let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Bonjour</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <p>voulez vous supprimer un domaine ?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark"  (click)="c('Save click')"> oui </button>
+    </div>
+  </ng-template>
+  
+  
