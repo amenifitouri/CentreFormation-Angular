@@ -19,6 +19,7 @@ import { PaysComponent } from './Pays/pays/pays.component';
 import { ProfilComponent } from './Profil/profil/profil.component';
 import { OrganismeComponent } from './Organisme/organisme/organisme.component';
 import { FormateurComponent } from './formateur/formateur.component';
+import { FormationComponent } from './formation/formation.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { FormateurComponent } from './formateur/formateur.component';
     ProfilComponent,
     OrganismeComponent,
     FormateurComponent,
+    FormationComponent,
   
   
   ],

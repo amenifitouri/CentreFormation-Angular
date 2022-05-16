@@ -1,1 +1,117 @@
-<p>formateur works!</p>
+
+<button routerLink="/formation" class="bt" mat-raised-button color="warn">Les formations </button>
+
+
+
+  <button class="btn1" mat-raised-button color="primary" (onclick)="open(content)">Ajouter Formateur</button>
+
+<table class="table datatable-responsive">
+  
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nom</th>
+      <th>Prenom </th>
+      <th>email</th>
+      <th>type</th>
+      <th>Organsime</th>
+      <th class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let Formateur of formateurss">
+      <td>{{ Formateur.id }}</td>
+      <td>{{Formateur.nom }}</td>
+      <td>{{ Formateur.prenom }}</td>
+      <td>{{ Formateur.email }}</td>
+      <td>{{ Formateur.type }}</td>
+      <td>organisme1</td>
+      
+      <td class="text-center">
+        <div class="list-icons">
+          <div class="dropdown">
+              <button mat-button color="warn">Modifier</button>
+              <button mat-button color="accent" (click)="delete(formateur.id)" (click)="open2(contentt)">Déactiver</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Formateur</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card my-5">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #formateurForm="ngForm">
+          <div class="form-group">
+            <label for="nom">Nom </label>
+            <input type="text" [(ngModel)]="formateur.nom" 
+            class="form-control" 
+            id="nom" 
+            name="nom" 
+            placeholder="Enter user name "
+            required #nom="ngModel">
+        </div>
+       
+        <div [hidden]="!nom.pristine" class="alert alert-danger">nom is required</div>
+        <div class="form-group">
+            <label for="pwd">prenom</label>
+            <input type="password" [(ngModel)]="formateur.prenom" 
+              class="form-control" 
+              id="prenom" 
+              name="prenom" 
+              placeholder="Enter your prenom"
+              required #prenom="ngModel">
+          </div>
+         
+          <div [hidden]="!prenom.pristine" class="alert alert-danger">prenom is required</div>
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" [(ngModel)]="formateur.email" 
+              class="form-control" 
+              id="email" 
+              name="email" 
+              placeholder="Enter your email"
+              required #email="ngModel">
+            
+         
+         
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="!formateurForm.form.valid" (click)="onSubmit()" (click)="modal.close('Save click')"
+          class="btn btn-info">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  </div>
+ 
+</ng-template>
+
+<ng-template #contentt let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bonjour</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>voulez vous supprimer un formateur ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"  (click)="c('Save click')"> oui </button>
+  </div>
+</ng-template>
+
+
+  
+  
+
+
